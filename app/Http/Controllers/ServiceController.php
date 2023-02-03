@@ -76,4 +76,20 @@ class ServiceController extends Controller
 
         return response()->json($data);
     }
+
+    public function clients(Request $request){
+
+        // $service = Service::find($request->service_id);
+        // $service->clients()->attach($request->client_id);
+        // $service->load('clients');
+        // return response()->json($service);
+
+        $service = Service::find($request->service_id);
+        $clients = $service->clients()->get();
+        $data = [
+            'message' => 'Clients attached successfully',
+            'clients' => $clients
+        ];
+        return response()->json($data);
+    }
 }

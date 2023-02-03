@@ -10,8 +10,12 @@ class ClientController extends Controller
  
     public function index()
     {
-        //
+        //Retornar todos los clientes
         $client = Client::all();
+
+        //Agregar los servicios a los clientes
+        $client->load('services');
+
         return response()->json($client);
     }
  
@@ -41,7 +45,7 @@ class ClientController extends Controller
     public function show(Client $client)
     {
         //
-        return response()->json($client);
+        return response()->json($client->withPivot());
     }
  
     public function edit(Client $client)
@@ -77,6 +81,32 @@ class ClientController extends Controller
             'client' => $client
         ];
 
+        return response()->json($data);
+    }
+
+    public function attach(Request $request){
+
+        $client = Client::find($request->client_id);
+
+        //Crea un servicio para la tabla clientes
+        $client->services()->attach($request->service_id);
+        $data = [
+            'message' => 'Service attached successfully',
+            'client' => $client
+        ];
+        return response()->json($data);
+    }
+
+    public function detach(Request $request){
+
+        $client = Client::find($request->client_id);
+
+        //Elimina un servicio para la tabla clientes
+        $client->services()->detach($request->service_id);
+        $data = [
+            'message' => 'Service detached successfully',
+            'client' => $client
+        ];
         return response()->json($data);
     }
 }

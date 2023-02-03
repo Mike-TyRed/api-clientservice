@@ -11,3 +11,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('clients', ClientController::class);
 Route::resource('services', ServiceController::class);
+
+Route::post('clients/services', [ClientController::class , 'attach']);
+Route::delete('clients/services/detach', [ClientController::class , 'detach']);
+
+Route::post('services/clients', [ServiceController::class , 'clients']);
