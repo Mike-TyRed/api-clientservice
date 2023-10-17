@@ -15,11 +15,6 @@ class ServiceController extends Controller
         return response()->json($service);
     }
  
-    public function create()
-    {
-        //
-    }
- 
     public function store(Request $request)
     {
         //
@@ -41,11 +36,6 @@ class ServiceController extends Controller
     {
         //
         return response()->json($service);
-    }
- 
-    public function edit(Service $service)
-    {
-        //
     }
  
     public function update(Request $request, Service $service)

@@ -19,11 +19,6 @@ class ClientController extends Controller
         return response()->json($client);
     }
  
-    public function create()
-    {
-        //
-    }
- 
     public function store(Request $request)
     {
         //
@@ -46,12 +41,6 @@ class ClientController extends Controller
     {
         //
         return response()->json($client->withPivot());
-    }
- 
-    public function edit(Client $client)
-    {
-        //
-
     }
  
     public function update(Request $request, Client $client)
